@@ -36,6 +36,21 @@ function getFineMatch(strToSearch, regexList) {
   return m;
 }
 
+function addToLegendPageVisitQueue(queue, collectionMap, pagePath) {
+  if (collectionMap[pagePath]) {
+    console.log(`Page path, ${pagePath} , is already on the queue; skipping`);
+    return;
+  }
+  console.log(`Page path, ${pagePath} , will be pushed to queue`);
+  queue.push(pagePath);
+  console.log(`Page path, ${pagePath} , will be added to the collection map`);
+  collectionMap[pagePath] = {};
+}
+
+function getLegendPageData(pagePath) {
+  
+}
+
 
 
 /* Main */
@@ -48,6 +63,8 @@ const newSeasonPath = getFineMatch(homePage, findNewSeasonPath);
 const newSeasonPage = getHttpContent(`${rootUrl}${newSeasonPath}`);
 const newLegendPath = getFineMatch(newSeasonPage, findNewLegendPath);
 
+// Visit each legend page and collect page data
+const legendPageVistQueue = [];
+const collectionMap = {};
+addToLegendPageVisitQueue(legendPageVistQueue, collectionMap, newLegendPath)
 
-
-console.log(newLegendPath);
