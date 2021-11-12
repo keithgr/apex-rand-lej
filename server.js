@@ -18,7 +18,7 @@ const findLegendName = [
   new RegExp( `[a-z]+` , 'ig' )
 ] 
 const findLegendImage = [
-  new RegExp( `https\\://media\\.contentapi\\.ea\\.com/content/dam/apex-legends/common/legends/(\\w+/)?apex-section-bg-legends-[\\w\\-]+\\.jpg\\.adapt\\.768w\\.jpg` , 'ig' )
+  new RegExp( `https\\://media\\.contentapi\\.ea\\.com/content/dam/apex-legends/common/[\\w\\-/]+/apex-section-bg-legends-[\\w\\-]+\\.jpg\\.adapt\\.768w\\.jpg` , 'ig' )
 ]
 const scanLegendPaths = new RegExp( `/games/apex-legends/about/characters/[\\w\\-]+` , 'ig' )
 
@@ -90,6 +90,3 @@ while (legendPageVisitQueue.length > 0) {
   const nextPagePath = legendPageVisitQueue.pop();
   collectLegendPageData(legendPageVisitQueue, collectionMap, nextPagePath);
 }
-
-console.log('COLLLECT: ' + JSON.stringify(collectionMap));
-
