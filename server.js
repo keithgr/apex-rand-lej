@@ -1,3 +1,5 @@
+/* Collect legends from website */
+
 // Imports
 const request = require('sync-request');
 
@@ -90,3 +92,126 @@ while (legendPageVisitQueue.length > 0) {
   const nextPagePath = legendPageVisitQueue.pop();
   collectLegendPageData(legendPageVisitQueue, collectionMap, nextPagePath);
 }
+
+const legendDataList = [];
+for (let path in collectionMap) {
+  const legendData = collectionMap[path];
+  legendDataList.push(legendData);
+}
+
+
+
+
+
+
+/* Pre-existing server init stuff */
+// init project
+require('merge-descriptors');
+
+const express = require("express");
+const bodyParser = require("body-parser");
+const app = express();
+const fs = require("fs");
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// we've started you off with Express,
+// but feel free to use whatever libs or frameworks you'd like through `package.json`.
+
+// http://expressjs.com/en/starter/static-files.html
+app.use(express.static("public"));
+
+// init sqlite db
+const dbFile = "./.data/sqlite.db";
+const exists = fs.existsSync(dbFile);
+const sqlite3 = require("sqlite3").verbose();
+const db = new sqlite3.Database(dbFile);
+
+// set the view engine to ejs
+app.set("view engine", "ejs");
+
+// static values
+const firstSlotTimeDelay = 3000;
+const secondSlotTimeDelay = 6000;
+const thirdSlotTimeDelay = 9000;
+
+const defaultRoomData = {
+  version: 0
+};
+
+const randLegs = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+
+// server-side memory
+const tempServerData = {
+  rooms: {}
+};
+
+function generateMeta() {
+  const randLegsCopy = randLegs.slice(0);
+  const meta = [];
+  for (let l = 0; l < 3; l++) {
+    const r = Math.floor(randLegsCopy.length * Math.random());
+    const randLeg = randLegsCopy.splice(r, 1)[0];
+    meta.push(randLeg);
+  }
+  return meta;
+}
+
+// view homepage
+app.get("/", (request, response) => {
+  let roomId = request.query.roomId;
+  if (!roomId || roomId === "") {
+    response.render(`index`);
+  }
+  else {
+    roomId = encodeURIComponent(request.query.roomId.toLowerCase())
+    response.redirect(`/${roomId}`);
+  }
+});
+
+// view a specific room
+app.get("/:roomId/", (request, response) => {
+  const roomId = request.params.roomId;
+  response.render(`room`, {
+    roomId: roomId
+  });
+});
+
+// endpoint to update room data to a spinning state
+app.post("/api/:roomId/", (request, response) => {
+  const roomId = request.params.roomId;
+  const roomDataSnapshot = tempServerData.rooms[roomId];
+  const now = Date.now();
+  if (!roomDataSnapshot || (roomDataSnapshot && now > roomDataSnapshot.spinTimes[2])) {
+    const newRoomData = {
+      version: now,
+      spinTimes: [
+        now + firstSlotTimeDelay,
+        now + secondSlotTimeDelay,
+        now + thirdSlotTimeDelay
+      ],
+      meta: generateMeta()
+    };
+    tempServerData.rooms[roomId] = newRoomData;
+  } else {
+    console.warn(`Room ${roomId} is already spinning`);
+  }
+});
+
+// endpoint to get state data of a room
+app.get("/api/:roomId/", (request, response) => {
+  const roomId = request.params.roomId;
+  const roomData = tempServerData.rooms[roomId] || defaultRoomData;
+  roomData.time = Date.now();
+  response.send(JSON.stringify(roomData));
+});
+
+// helper function that prevents html/css/script malice
+const cleanseString = function(string) {
+  return string.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+};
+
+// listen for requests :)
+var listener = app.listen(process.env.PORT, () => {
+  console.log(`Your app is listening on port ${listener.address().port}`);
+});
