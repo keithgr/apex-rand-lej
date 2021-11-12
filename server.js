@@ -10,9 +10,9 @@ const findNewSeasonPath = [
   new RegExp( `/games/apex-legends/\\w+` , 'ig' )
 ];
 const findNewLegendPath = [
-  new RegExp( `/games/apex-legends/about/characters/\\w+` , 'ig' )
+  new RegExp( `/games/apex-legends/about/characters/[\\w\\-]+` , 'ig' )
 ];
-const scanLegendPaths = new RegExp( `/games/apex-legends/about/characters/\\w+` , 'ig' )
+const scanLegendPaths = new RegExp( `/games/apex-legends/about/characters/[\\w\\-]+` , 'ig' )
 
 // Functions
 function getHttpContent(url) {
@@ -55,6 +55,7 @@ function collectLegendPageData(queue, collectionMap, pagePath) {
     const foundPath = foundPaths[p];
     addToLegendPageVisitQueue(queue, collectionMap, foundPath);
   }
+  
 }
 
 
@@ -70,7 +71,7 @@ const newSeasonPage = getHttpContent(`${rootUrl}${newSeasonPath}`);
 const newLegendPath = getFineMatch(newSeasonPage, findNewLegendPath);
 
 // Visit each legend page and collect page data
-const legendPageVisitQueue = [];
+const legendPageVisitQueue = []; 
 const collectionMap = {};
 
 addToLegendPageVisitQueue(legendPageVisitQueue, collectionMap, newLegendPath)
@@ -78,3 +79,5 @@ while (legendPageVisitQueue.length > 0) {
   const nextPagePath = legendPageVisitQueue.pop();
   collectLegendPageData(legendPageVisitQueue, collectionMap, nextPagePath);
 }
+
+console.log('COLLLECT: ' + JSON.stringify(collectionMap));
