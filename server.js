@@ -99,6 +99,8 @@ for (let path in collectionMap) {
   legendDataList.push(legendData);
 }
 
+console.log(legendDataList);
+
 
 
 
@@ -122,10 +124,10 @@ app.use(bodyParser.json());
 app.use(express.static("public"));
 
 // init sqlite db
-const dbFile = "./.data/sqlite.db";
-const exists = fs.existsSync(dbFile);
-const sqlite3 = require("sqlite3").verbose();
-const db = new sqlite3.Database(dbFile);
+// const dbFile = "./.data/sqlite.db";
+// const exists = fs.existsSync(dbFile);
+// const sqlite3 = require("sqlite3").verbose();
+// const db = new sqlite3.Database(dbFile);
 
 // set the view engine to ejs
 app.set("view engine", "ejs");
@@ -139,7 +141,10 @@ const defaultRoomData = {
   version: 0
 };
 
-const randLegs = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+const randLegs = [];
+for (let i = 0; i < legendDataList.length; i++) {
+  randLegs.push(i);
+}
 
 // server-side memory
 const tempServerData = {

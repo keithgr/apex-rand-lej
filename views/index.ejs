@@ -1,0 +1,42 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A meta generator for Apex Legends" />
+
+    <title>Rand Leg</title>
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- import the webpage's client-side javascript file -->
+    <script src="/client.js" defer></script>
+  </head>
+
+  <body>
+    <header class="padded">
+      <h1>
+        Rand Leg
+      </h1>
+      <h6>
+        (pronounced "Ledge")
+      </h6>
+    </header>
+    <p class="padded">
+      Because everybody asks, <em>Where we droppin'?</em>
+      <br>
+      But nobody asks, <em>Who's droppin'?</em>
+    </p>
+    <form action="./">
+      <label>Enter room ID</label>
+      <input type="text" name="roomId">
+      <div class="padded">
+        <input type="submit" id="join" value="Join">
+      </div>
+    </form>
+  </body>
+</html>
