@@ -17,7 +17,7 @@ const findLegendName = [
   new RegExp( `\\w+` , 'ig' )
 ]
 const findLegendImage = [
-  new RegExp( `https\\://media\\.contentapi\\.ea\\.com/content/dam/apex-legends/common/legends/\\S+\\.jpg` )
+  new RegExp( `https\\://media\\.contentapi\\.ea\\.com/content/dam/apex-legends/common/legends/apex-section-bg-legends-[\\w\\-]+\\.jpg\\.adapt\\.768w\\.jpg` , 'ig' )
 ]
 const scanLegendPaths = new RegExp( `/games/apex-legends/about/characters/[\\w\\-]+` , 'ig' )
 
@@ -66,8 +66,6 @@ function collectLegendPageData(queue, collectionMap, pagePath) {
   collectionMap[pagePath]["name"] = legendName;
   const legendImage = getFineMatch(page, findLegendImage);
   collectionMap[pagePath]["image"] = legendImage;
-  
-  console.log('IMAGE - ' + legendImage);
 }
 
 
