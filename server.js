@@ -12,6 +12,10 @@ const findNewSeasonPath = [
 const findNewLegendPath = [
   new RegExp( `/games/apex-legends/about/characters/[\\w\\-]+` , 'ig' )
 ];
+const findLegendName = [
+    new RegExp( `>\\w+</h1>` , 'ig' ),
+    new RegExp( `\\w+` , 'ig' )
+]
 const scanLegendPaths = new RegExp( `/games/apex-legends/about/characters/[\\w\\-]+` , 'ig' )
 
 // Functions
@@ -55,7 +59,8 @@ function collectLegendPageData(queue, collectionMap, pagePath) {
     const foundPath = foundPaths[p];
     addToLegendPageVisitQueue(queue, collectionMap, foundPath);
   }
-  
+  const legendName = getFineMatch(page, findLegendName);
+  collectionMap[pagePath]["name"] = legendName;
 }
 
 
