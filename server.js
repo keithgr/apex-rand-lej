@@ -195,7 +195,8 @@ app.post("/api/:roomId/", (request, response) => {
         now + secondSlotTimeDelay,
         now + thirdSlotTimeDelay
       ],
-      meta: generateMeta()
+      meta: generateMeta(),
+      legendDataList: legendDataList
     };
     tempServerData.rooms[roomId] = newRoomData;
   } else {
