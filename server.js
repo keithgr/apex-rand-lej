@@ -1,18 +1,17 @@
 // Imports
 const request = require('sync-request');
 
+// Constants
+const rootUrl = 'https://www.ea.com';
+
 // Regex
-const findNewSeasonPage = [
+const findNewSeasonPath = [
   new RegExp( `/games/apex-legends/[^<]+season` , 'ig' ),
   new RegExp( `/games/apex-legends/\\w+` , 'ig' )
 ];
-
-// Main
-const homePage = getHttpContent('https://www.ea.com/games/apex-legends');
-let r = getMatches(homePage, findNewSeasonPage[0])[0];
-console.log(r);
-r = getMatches(r, findNewSeasonPage[1])[0];
-console.log(r);
+const findNewLegendPath = [
+  new RegExp( `/games/apex-legends/about/characters/\\w+` , 'ig' )
+];
 
 // Functions
 function getHttpContent(url) {
@@ -29,4 +28,26 @@ function getMatches(strToSearch, regex) {
   return results;
 }
 
-function 
+function getFineMatch(strToSearch, regexList) {
+  let m = strToSearch;
+  for (let r = 0; r < regexList.length; r++) {
+    m = getMatches(m, regexList[r])[0];
+  }
+  return m;
+}
+
+
+
+/* Main */
+
+// Home page to season page
+const homePage = getHttpContent(`${rootUrl}/games/apex-legends`);
+const newSeasonPath = getFineMatch(homePage, findNewSeasonPath);
+
+// Season page to new legend page
+const newSeasonPage = getHttpContent(`${rootUrl}${newSeasonPath}`);
+const newLegendPath = getFineMatch(newSeasonPage, findNewLegendPath);
+
+
+
+console.log(newLegendPath);
