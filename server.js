@@ -5,6 +5,7 @@ const request = require('sync-request');
 
 // Constants
 const rootUrl = 'https://www.ea.com';
+const charactersUrl = 'https://www.ea.com/games/apex-legends/about/characters';
 
 // Regex
 const findNewSeasonPath = [
@@ -76,12 +77,8 @@ function collectLegendPageData(queue, collectionMap, pagePath) {
 /* Main */
 
 // Home page to season page
-const homePage = getHttpContent(`${rootUrl}/games/apex-legends`);
-const newSeasonPath = getFineMatch(homePage, findNewSeasonPath);
-
-// Season page to new legend page
-const newSeasonPage = getHttpContent(`${rootUrl}${newSeasonPath}`);
-const newLegendPath = getFineMatch(newSeasonPage, findNewLegendPath);
+const charactersPage = getHttpContent(charactersUrl);
+const newLegendPath = getFineMatch(charactersPage, findNewLegendPath);
 
 // Visit each legend page and collect page data
 const legendPageVisitQueue = []; 
