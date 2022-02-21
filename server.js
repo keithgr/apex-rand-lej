@@ -76,7 +76,6 @@ function collectLegendPageData(queue, collectionMap, pagePath) {
 
 /* Main */
 
-
 // Begin at character page
 const charactersPage = getHttpContent(charactersUrl);
 const legendPaths = getMatches(charactersPage, scanLegendPaths);
