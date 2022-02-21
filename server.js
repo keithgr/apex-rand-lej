@@ -18,7 +18,7 @@ const scanLegendPath = [
 const findLegendName = [
   new RegExp( `<h1[\\s\\S]+</h1>` , 'ig' ),
   new RegExp( `>[\\s\\S]+</h1>` , 'ig' ),
-  new RegExp( `[a-z]+` , 'ig' )
+  new RegExp( `[a-z\\s]+` , 'ig' )
 ] 
 const findLegendImage = [
   new RegExp( `https\\://media\\.contentapi\\.ea\\.com/content/dam/apex-legends/common/[\\w\\-/]+/apex-section-bg-legends-[\\w\\-]+\\.jpg\\.adapt\\.768w\\.jpg` , 'ig' )
@@ -92,11 +92,18 @@ while (legendPageVisitQueue.length > 0) {
   collectLegendPageData(legendPageVisitQueue, collectionMap, nextPagePath);
 }
 
-const legendDataList = [];
+let legendDataList = [];
 for (let path in collectionMap) {
   const legendData = collectionMap[path];
   legendDataList.push(legendData);
 }
+legendDataList = legendDataList.sort(
+  (a, b) => {
+    if (a.name < b.name) { return -1; }
+    else if (a.name > b.name) { return 1; }
+    else { return 0; }
+  }
+);
 
 console.log(legendDataList);
 
