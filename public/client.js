@@ -96,7 +96,6 @@ function displayLastSpin() {
     console.log("What's the meta?");
     return;
   }
-  console.log(roomDataSnapshot);
   const legendIds = [
     roomDataSnapshot.meta[0],
     roomDataSnapshot.meta[1],
@@ -109,6 +108,7 @@ function displayLastSpin() {
 
 function renderRoomData(data) {
   const roomDataSnapshot = roomData;
+  console.log(roomDataSnapshot);
   spinUntilTime(0);
   spinUntilTime(1);
   spinUntilTime(2);
