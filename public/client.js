@@ -5,7 +5,11 @@ const pingInterval = 1000;
 const spinInterval = 75;
 const clientStatusTimeout = 900;
 
-const green = "lightgreen";
+const cardColors = [
+  "orange",
+  "lightblue",
+  "lightgreen"
+];
 
 const roomId = document.getElementById("bod").getAttribute("roomId");
 const spinButton = document.getElementById("spin");
@@ -30,8 +34,9 @@ let roomData = {
 function showLegendBanner(slotIndex, legendId, isConfirmed=false) {
   const slot = slots[slotIndex];
   const legend = roomData.legendDataList[legendId];
+  const cardColor = cardColors[slotIndex];
   slot.innerHTML = `
-    <div class="card" width=115 height=250 style="${ isConfirmed ? `border: solid thick ${green}; box-shadow: 0 0 15px ${green};` : 'border: thin dashed gray' }">
+    <div class="card" width=115 height=250 style="${ isConfirmed ? `border: solid thick ${cardColor}; box-shadow: 0 0 10px ${cardColor};` : 'border: thin dashed gray' }">
       <div class="kard legend-name">
         <strong>${legend.name}</strong>
       </div>
