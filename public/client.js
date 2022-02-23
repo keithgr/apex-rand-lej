@@ -29,7 +29,7 @@ function showLegendBanner(slotIndex, legendId, isConfirmed=false) {
     <div class="card" width=115 height=250 style="${ isConfirmed ? `border: solid thick ${green}; box-shadow: 0 0 ${legend.tier === "red" ? 500 : 50}px ${green};` : 'border: thin dashed gray' }">
       <img class="legend-pic" height=180 src="${legend.image}">
       <div class="kard legend-name">
-        <h3>${legend.name}</h3>
+        <strong>${legend.name}</strong>
       </div>
     </div>
   `;
