@@ -17,6 +17,12 @@ const slots = [
   document.getElementById("slot2")
 ];
 
+const playerNames = [
+  "player_won",
+  "player_too",
+  "player_tree"
+]
+
 let roomData = {
   version: 0
 };
@@ -25,13 +31,13 @@ function showLegendBanner(slotIndex, legendId, isConfirmed=false) {
   const slot = slots[slotIndex];
   const legend = roomData.legendDataList[legendId];
   slot.innerHTML = `
-    <h3 class="player-name">player_one</h3>
-    <div class="card" width=115 height=250 style="${ isConfirmed ? `border: solid thick ${green}; box-shadow: 0 0 ${legend.tier === "red" ? 500 : 50}px ${green};` : 'border: thin dashed gray' }">
-      <img class="legend-pic" height=180 src="${legend.image}">
+    <div class="card" width=115 height=250 style="${ isConfirmed ? `border: solid thick ${green}; box-shadow: 0 0 15px ${green};` : 'border: thin dashed gray' }">
       <div class="kard legend-name">
         <strong>${legend.name}</strong>
       </div>
+      <img class="legend-pic" height=180 src="${legend.image}">
     </div>
+    <h6 class="player-name">${playerNames[slotIndex]}</h6>
   `;
 }
 
