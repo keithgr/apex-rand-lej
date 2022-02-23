@@ -92,6 +92,11 @@ function spinUntilTime(slotIndex) {
 
 function displayLastSpin() {
   const roomDataSnapshot = roomData;
+  if (!roomDataSnapshot.meta) {
+    console.log("What's the meta?");
+    return;
+  }
+  console.log(roomDataSnapshot);
   const legendIds = [
     roomDataSnapshot.meta[0],
     roomDataSnapshot.meta[1],
@@ -147,7 +152,6 @@ function getStatus() {
 
 function submitSpin() {
   const roomDataSnapshot = roomData;
-  console.log(roomDataSnapshot);
   var xhttp = new XMLHttpRequest();
   xhttp.open("POST", `/api/${roomId}`);
   xhttp.send();
