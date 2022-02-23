@@ -97,7 +97,11 @@ for (let path in collectionMap) {
   const legendData = collectionMap[path];
   legendDataList.push(legendData);
 }
-legendDataList = legendDataList.sort(
+legendDataList = legendDataList.map(
+  (k) => {
+    
+  }  
+).sort(
   (a, b) => {
     if (a.name < b.name) { return -1; }
     else if (a.name > b.name) { return 1; }
