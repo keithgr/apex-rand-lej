@@ -92,8 +92,14 @@ footer {
   border-top: 1px solid lightgrey;
 }
 
+.player-name {
+  text-align: center;
+}
+
 .legend-name {
   text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .legend-pic {
