@@ -39,16 +39,25 @@ header > * {
   width: 33%;
 }
 
-#legendtoggle {
+#legend-toggle {
   display: flex;
   width: 100%;
 }
 
-#legendtoggle > * {
+#legend-toggle > * {
   flex-basis: 1 1 0px;
   margin: 5px 5px;
   padding: 5px 5px;
   width: 33%;
+}
+
+.toggle-option {
+  display: flex;
+  width: 100%;
+}
+
+".toggle-option > *" {
+  flex-basis: 1 1 0px;
 }
 
 h1 {
