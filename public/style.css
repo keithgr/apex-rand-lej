@@ -39,12 +39,20 @@ header > * {
   width: 33%;
 }
 
-h1 {
-  color: #373fff;
+#legendtoggle {
+  display: flex;
+  width: 100%;
 }
 
-h2 {
-  
+#legendtoggle > * {
+  flex-basis: 1 1 0px;
+  margin: 5px 5px;
+  padding: 5px 5px;
+  width: 33%;
+}
+
+h1 {
+  color: #373fff;
 }
 
 .bold {
@@ -122,4 +130,5 @@ footer {
 .padded {
   padding-left: 10px;
   padding-bottom: 20px;
+  padding-right: 10px;
 }
