@@ -81,9 +81,10 @@
     
     <div id="legendtoggle">
       <div>
-        <% for(let i = 0; i <= legends.length; i++) { %>
-	      <%= legends[i]['name'] %>
-        <% } %>
+        <%  for(let i = 0; i <= legends.length; i++) { %>
+        <input type="checkbox" id="p<%= i %>l" name="<%= legends[i] %>" value="Bike">
+        <label for="vehicle1"> I have a bike</label><br>
+        <%  } %>
       </div>
       <div>
         Johnny
