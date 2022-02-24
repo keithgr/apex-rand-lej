@@ -51,6 +51,8 @@ header > * {
   width: 33%;
 }
 
+
+
 .toggle-option {
   display: flex;
   width: 100%;
@@ -58,7 +60,10 @@ header > * {
 
 ".toggle-option > *" {
   flex-basis: 1 1 0px;
+  width: 100%;
 }
+
+
 
 h1 {
   color: #373fff;
