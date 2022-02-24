@@ -102,6 +102,11 @@ button:active {
   box-shadow: none;
 }
 
+label {
+  text-align: right;
+  float: right
+}
+
 li {
   margin-bottom: 5px;
 }

@@ -81,16 +81,25 @@
     
     <div id="legendtoggle">
       <div>
-        <%  for(let i = 0; i <= legends.length; i++) { %>
-        <input type="checkbox" id="p<%= i %>l" name="<%= legends[i] %>" value="Bike">
-        <label for="vehicle1"> I have a bike</label><br>
+        <%  for(let i = 0; i < legends.length; i++) { %>
+          <input type="checkbox" id="p0l<%= i %>" name="p0l<%= i %>" value=1>
+          <label for="p0l<%= i %>"><%= legends[i] %></label>
+          
         <%  } %>
       </div>
       <div>
-        Johnny
+        <%  for(let i = 0; i < legends.length; i++) { %>
+          <input type="checkbox" id="p1l<%= i %>" name="p1l<%= i %>" value=1>
+          <label for="p1l<%= i %>"><%= legends[i] %></label>
+          
+        <%  } %>
       </div>
       <div>
-        Test
+        <%  for(let i = 0; i < legends.length; i++) { %>
+          <input type="checkbox" id="p2l<%= i %>" name="p2l<%= i %>" value=1>
+          <label for="p2l<%= i %>"><%= legends[i] %></label>
+          
+        <%  } %>
       </div>
     </div>
     
