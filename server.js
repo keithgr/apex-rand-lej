@@ -184,7 +184,8 @@ app.get("/", (request, response) => {
 app.get("/:roomId/", (request, response) => {
   const roomId = request.params.roomId;
   response.render(`room`, {
-    roomId: roomId
+    roomId: roomId,
+    legendDataList: legendDataList
   });
 });
 
