@@ -36,7 +36,7 @@ function showLegendBanner(slotIndex, legendId, isConfirmed=false) {
   const legend = roomData.legendDataList[legendId];
   const cardColor = cardColors[slotIndex];
   slot.innerHTML = `
-    <div class="card" width=115 height=250 style="${ isConfirmed ? `border: solid thick ${cardColor}; box-shadow: 0 0 10px ${cardColor};` : 'border: thick dashed gray' }">
+    <div class="card" width=115 height=250 style="${ isConfirmed ? `border: solid thick ${cardColor}; box-shadow: 0 0 10px ${cardColor};` : 'border: thick solid gray' }">
       <div class="kard legend-name">
         <strong>${legend.name}</strong>
       </div>
