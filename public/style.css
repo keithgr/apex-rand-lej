@@ -116,11 +116,20 @@ button {
   width: 100%;
 }
 
+#load {
+  background-color: lightgrey;
+}
+
 #spin-container {
   margin-top: 10px;
 }
 
-#spinText {
+#loadsave-container {
+  margin-top: 10px;
+  
+}
+
+#spinText, #saveText {
   color: white;
 }
 
