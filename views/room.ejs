@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="A meta generator for Apex Legends" />
 
-    <title>Rand Lej</title>
+    <title>Rand Lej - <%= roomId %></title>
 
     <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="/style.css" />
@@ -23,6 +23,7 @@
   </head>
 
   <body id="bod" roomId="<%= roomId %>">
+    
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
@@ -55,7 +56,6 @@
         </div>
       <% } %>
     </div>
-
     
     <div id="spin-container" class="padded">
       <button id="spin"><strong id="spinText">Spin</strong></button>
@@ -79,5 +79,6 @@
         </div>        
       <% } %>
     </div>
+              
   </body>
 </html>
