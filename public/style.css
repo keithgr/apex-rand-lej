@@ -39,6 +39,7 @@ header > * {
   width: 33%;
 }
 
+
 #legend-toggle {
   display: flex;
   width: 100%;
@@ -48,21 +49,7 @@ header > * {
   margin: 5px 5px;
   padding: 5px 5px;
   width: 33%;
-  float: left;
 }
-
-
-
-.toggle-option {
-  display: flex;
-  width: 100%;
-}
-
-.toggle-option-filler {
-  width: 100%;
-}
-
-
 
 h1 {
   color: #373fff;
