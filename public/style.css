@@ -53,10 +53,11 @@ header > * {
 
 .toggle-option {
   display: flex;
+  padding-left: 20px;
 }
 
 label {
-  flex-grow: 9999;
+  min-width: 150;
   text-align: left;
   padding-left: 10px;
 }
@@ -93,7 +94,7 @@ input {
 }
 
 input[type=checkbox] {
-  
+  height: 100%;
 }
 
 button {
