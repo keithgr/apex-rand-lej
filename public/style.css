@@ -53,7 +53,6 @@ header > * {
 
 .toggle-option {
   display: flex;
-  padding-left: px;
 }
 
 label {
@@ -67,6 +66,10 @@ label {
 
 h1 {
   color: #373fff;
+}
+
+h4 {
+  text-align: center;
 }
 
 .bold {
