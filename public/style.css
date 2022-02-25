@@ -120,13 +120,18 @@ button {
   background-color: lightgrey;
 }
 
+#load, #save {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 #spin-container {
   margin-top: 10px;
 }
 
 #loadsave-container {
   margin-top: 10px;
-  
+  display: flex;
 }
 
 #spinText, #saveText {
