@@ -39,36 +39,23 @@
         </h1> 
       </a>
     </header>
-      
-    <div id="slotmachine">
-      <div class="slot" id="slot0">
-        <div class="card" width="115" height="250" style="border: solid thick orange; box-shadow: 0 0 10px orange;">
-          <div class="kard legend-name">
-            <strong>Dummie</strong>
+    
+    <div id="slotmachine">      
+      <% let bannerColors = ['orange', 'lightblue', 'lightgreen'] %>
+      <% let defaultPlayerNames = ['player_won', 'player_too', 'player_tree'] %>
+      <% for (let s = 0; s < 3; s++) { %>
+        <div class="slot" id="slot<%= s %>">
+          <div class="card" width="115" height="250" style="border: solid thick orange; box-shadow: 0 0 10px <%= bannerColors[s] %>;">
+            <div class="kard legend-name">
+              <strong>Dummie</strong>
+            </div>
+            <img class="legend-pic" src="https://cdn.glitch.global/5fba9e63-a0f9-4df4-8cdc-134ede9a4405/dummie.png?v=1645584352373" height="180">
           </div>
-          <img class="legend-pic" src="https://cdn.glitch.global/5fba9e63-a0f9-4df4-8cdc-134ede9a4405/dummie.png?v=1645584352373" height="180">
+          <h6 class="player-name"><%= defaultPlayerNames[s] %></h6>
         </div>
-        <h6 class="player-name">player_won</h6>
-      </div>
-      <div class="slot" id="slot1">
-        <div class="card" width="115" height="250" style="border: solid thick lightblue; box-shadow: 0 0 10px lightblue;">
-          <div class="kard legend-name">
-            <strong>Dummie</strong>
-          </div>
-          <img class="legend-pic" src="https://cdn.glitch.global/5fba9e63-a0f9-4df4-8cdc-134ede9a4405/dummie.png?v=1645584352373" height="180">
-        </div>
-        <h6 class="player-name">player_too</h6>
-      </div>
-      <div class="slot" id="slot2">
-        <div class="card" width="115" height="250" style="border: solid thick lightgreen; box-shadow: 0 0 10px lightgreen;">
-          <div class="kard legend-name">
-            <strong>Dummie</strong>
-          </div>
-          <img class="legend-pic" src="https://cdn.glitch.global/5fba9e63-a0f9-4df4-8cdc-134ede9a4405/dummie.png?v=1645584352373" height="180">
-        </div>
-        <h6 class="player-name">player_tree</h6>
-      </div>
+      <% } %>
     </div>
+
     
     <div id="spin-container" class="padded">
       <button id="spin"><strong id="spinText">Spin</strong></button>
@@ -91,34 +78,6 @@
           <%  } %>
         </div>        
       <% } %>
-      <div>
-        <h4>Player 1</h4>
-        <%  for(let i = 0; i < legends.length; i++) { %>
-          <div class="toggle-option">
-            <input type="checkbox" id="p0l<%= i %>" name="p0l<%= i %>" value=1>
-            <label for="p0l<%= i %>"><%= legends[i] %></label>
-          </div>
-        <%  } %>
-      </div>
-      <div>
-        <h4>Player 2</h4>
-        <%  for(let i = 0; i < legends.length; i++) { %>
-          <div class="toggle-option">
-            <input type="checkbox" id="p1l<%= i %>" name="p1l<%= i %>" value=1>
-            <label for="p1l<%= i %>"><%= legends[i] %></label>
-          </div>
-        <%  } %>
-      </div>
-      <div>
-        <h4>Player 3</h4>
-        <%  for(let i = 0; i < legends.length; i++) { %>
-          <div class="toggle-option">
-            <input type="checkbox" id="p2l<%= i %>" name="p2l<%= i %>" value=1>
-            <label for="p2l<%= i %>"><%= legends[i] %></label>
-          </div>
-        <%  } %>
-      </div>
     </div>
-    
   </body>
 </html>
