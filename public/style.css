@@ -58,8 +58,8 @@ header > * {
   width: 100%;
 }
 
-".toggle-option > *" {
-  float: left;
+.toggle-option-filler {
+  width: 100%;
 }
 
 
