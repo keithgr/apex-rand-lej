@@ -81,7 +81,9 @@ function spinUntilTime(slotIndex) {
       spinUntilTime(slotIndex);
     }, spinInterval);
   } else {
-    renderNonSpinningStatus();
+    if (slotIndex == 2) {
+      renderNonSpinningStatus();
+    }
     const roomDataSnapshot = roomData;
     const legendId = roomDataSnapshot.meta[slotIndex];
     setTimeout(() => {

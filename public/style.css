@@ -113,6 +113,11 @@ button {
   cursor: pointer;
   padding: 10px 20px;
   margin: 5px;
+  width: 100%;
+}
+
+#spin-container {
+  margin-top: 10px;
 }
 
 #spinText {
