@@ -198,7 +198,7 @@ app.get("/:roomId/", (request, response) => {
 });
 
 // endpoint to update room data to a spinning state
-app.post("/api/:roomId/", (request, response) => {
+app.post("/api/:roomId/spin/", (request, response) => {
   const roomId = request.params.roomId;
   const roomDataSnapshot = tempServerData.rooms[roomId];
   const now = Date.now();
@@ -228,7 +228,7 @@ app.get("/api/:roomId/", (request, response) => {
 });
 
 // endpoint to update settings for room
-app.put("/api/:roomId/", (request, response) => {
+app.put("/api/:roomId/settings", (request, response) => {
   const roomId = request.params.roomId;
   const roomSettingsSnapshot = tempServerSettings.rooms[roomId];
   

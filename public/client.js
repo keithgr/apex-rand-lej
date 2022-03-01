@@ -157,7 +157,7 @@ function getStatus() {
 function submitSpin() {
   const roomDataSnapshot = roomData;
   var xhttp = new XMLHttpRequest();
-  xhttp.open("POST", `/api/${roomId}`);
+  xhttp.open("POST", `/api/${roomId}/spin`);
   xhttp.send();
 }
 
