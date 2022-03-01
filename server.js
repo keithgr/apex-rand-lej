@@ -144,7 +144,7 @@ const secondSlotTimeDelay = 6000;
 const thirdSlotTimeDelay = 9000;
 
 const defaultRoomData = {
-  version: 0
+  version: 0,
 };
 
 const randLegs = [];
@@ -220,6 +220,13 @@ app.get("/api/:roomId/", (request, response) => {
   roomData.time = Date.now();
   response.send(JSON.stringify(roomData));
 });
+
+// endpoint to update legend settings for room
+app.put("/api/:roomId/", (request, response) => {
+  
+});
+
+
 
 // helper function that prevents html/css/script malice
 const cleanseString = function(string) {

@@ -161,6 +161,12 @@ function submitSpin() {
   xhttp.send();
 }
 
+function loadLegendSettings() {
+  
+}
+
+
+
 getStatus();
 try {
   setTimeout(
@@ -175,3 +181,5 @@ catch (nah) {
 }
 
 spinButton.addEventListener("click", submitSpin);
+loadButton.addEventListener("click", loadLegendSettings);
+saveButton.addEventListener("click", saveLegendSettings);
