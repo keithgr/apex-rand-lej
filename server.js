@@ -208,7 +208,7 @@ app.post("/api/:roomId/spin/", (request, response) => {
       ],
       meta: generateMeta(),
       legendDataList: legendDataList,
-      settings: roomDataSnapshot.settings || defaultRoomSettings
+      settings: (roomDataSnapshot || {}).settings || defaultRoomSettings
     };
     tempServerData.rooms[roomId] = newRoomData;
   } else {

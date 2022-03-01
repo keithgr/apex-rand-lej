@@ -14,6 +14,7 @@ const cardColors = [
 const roomId = document.getElementById("bod").getAttribute("roomId");
 const spinButton = document.getElementById("spin");
 const spinText = document.getElementById("spinText");
+const legendToggle = document.getElementById("legend-toggle");
 const loadButton = document.getElementById("load");
 const saveButton = document.getElementById("save");
 
@@ -163,6 +164,14 @@ function submitSpin() {
 
 function loadLegendSettings() {
   
+}
+
+function saveLegendSettings() {
+  for(let p = 0; 0 < 3; p++) {
+    for (let l = 0; l < ) {
+      
+    }
+  }
 }
 
 
