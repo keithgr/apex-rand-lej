@@ -227,6 +227,7 @@ app.get("/api/:roomId/", (request, response) => {
 // endpoint to update settings for room
 app.post("/api/:roomId/settings", (request, response) => {
   const roomId = request.params.roomId;
+  tempServerData.rooms[roomId] = tempServerData.rooms[roomId] || {};
   const roomDataSnapshot = tempServerData.rooms[roomId];
   const newSettings = {};
   for (let p = 0; p < 3; p++) {
