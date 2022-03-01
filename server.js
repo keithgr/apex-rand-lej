@@ -159,10 +159,6 @@ const tempServerData = {
   rooms: {}
 };
 
-const tempServerSettings = {
-  rooms: {}
-};
-
 function generateMeta() {
   const randLegsCopy = randLegs.slice(0);
   const meta = [];
@@ -211,7 +207,8 @@ app.post("/api/:roomId/spin/", (request, response) => {
         now + thirdSlotTimeDelay
       ],
       meta: generateMeta(),
-      legendDataList: legendDataList
+      legendDataList: legendDataList,
+      settings: roomDataSnapshot.settings || defaultRoomSettings
     };
     tempServerData.rooms[roomId] = newRoomData;
   } else {
@@ -228,10 +225,12 @@ app.get("/api/:roomId/", (request, response) => {
 });
 
 // endpoint to update settings for room
-app.put("/api/:roomId/settings", (request, response) => {
+app.post("/api/:roomId/settings", (request, response) => {
   const roomId = request.params.roomId;
-  const roomSettingsSnapshot = tempServerSettings.rooms[roomId];
-  
+  const roomDataSnapshot = tempServerData.rooms[roomId];
+  for () {
+    
+  }
 });
 
 
