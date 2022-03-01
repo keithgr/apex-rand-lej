@@ -14,6 +14,8 @@ const cardColors = [
 const roomId = document.getElementById("bod").getAttribute("roomId");
 const spinButton = document.getElementById("spin");
 const spinText = document.getElementById("spinText");
+const loadButton = document.getElementById("load");
+const saveButton = document.getElementById("save");
 
 const slots = [
   document.getElementById("slot0"),
@@ -171,4 +173,5 @@ try {
 catch (nah) {
   console.log("Could not display result of last spin");
 }
+
 spinButton.addEventListener("click", submitSpin);
