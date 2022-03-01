@@ -156,7 +156,7 @@ function getStatus() {
 }
 
 function submitSpin() {
-  const roomDataSnapshot = roomData;
+  // const roomDataSnapshot = roomData;
   var xhttp = new XMLHttpRequest();
   xhttp.open("POST", `/api/${roomId}/spin`);
   xhttp.send();
@@ -167,11 +167,19 @@ function loadLegendSettings() {
 }
 
 function saveLegendSettings() {
-  for(let p = 0; 0 < 3; p++) {
-    for (let l = 0; l < ) {
+  const toggleColumns = legendToggle.getElementsByClassName('toggle-column');
+  for (let p = 0; p < toggleColumns.length; p++) {
+    const toggleColumn = toggleColumns[p];
+    const toggleOptions = toggleColumn.getElementsByClassName('toggle-option');
+    for (let l = 0; l < toggleOptions.length; l++) {
+      const toggleInput = document.getElementById(`p${p}l${l}`);
       
     }
   }
+  
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("POST", `/api/${roomId}/settings`);
+  xhttp.send();
 }
 
 
