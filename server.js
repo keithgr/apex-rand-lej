@@ -228,9 +228,13 @@ app.get("/api/:roomId/", (request, response) => {
 app.post("/api/:roomId/settings", (request, response) => {
   const roomId = request.params.roomId;
   const roomDataSnapshot = tempServerData.rooms[roomId];
-  for () {
-    
+  const newSettings = {};
+  for (let p = 0; p < 3; p++) {
+    for (let l = 0; l < legendDataList.length; l++) {
+      newSettings[`p${p}l${l}`] = request.query[`p${p}l${l}`]
+    }
   }
+  tempServerData.rooms[roomId].settings = newSettings;
 });
 
 
