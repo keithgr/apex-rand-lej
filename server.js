@@ -239,7 +239,7 @@ app.post("/api/:roomId/settings/", (request, response) => {
     }
   }
   console.log(newSettings);
-  tempServerData.rooms[roomId].settings = newSettings;
+  // tempServerData.rooms[roomId].settings = newSettings;
 });
 
 
