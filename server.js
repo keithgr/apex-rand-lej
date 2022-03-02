@@ -145,6 +145,7 @@ const thirdSlotTimeDelay = 9000;
 
 const defaultRoomData = {
   version: 0,
+  spinTimes: [0, 0, 0]
 };
 
 const defaultRoomSettings = {};

@@ -137,7 +137,12 @@ function getStatus() {
             (!response.spinTimes || time < response.spinTimes[2]) &&
             (currentVersion !== newVersion)
           ) {
-            renderRoomData();
+            try {
+              renderRoomData();
+            }
+            catch (debug) {
+              throw `${debug} : ${JSON.stringify(response)} : ${JSON.stringify(roomData)} : ${JSON.stringify(roomDataSnapshot)}`;
+            }
           }
         } else {
           console.error('Server request was buggus maximus');
