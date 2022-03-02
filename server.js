@@ -149,10 +149,10 @@ const defaultRoomData = {
 
 const defaultRoomSettings = {};
 const randLegs = [];
-for (let i = 0; i < legendDataList.length; i++) {
-  randLegs.push(i);
+for (let l = 0; l < legendDataList.length; l++) {
+  randLegs.push(l);
   for (let p = 0; p < 3; p++) {
-     defaultRoomSettings[`p${}l${}`]; 
+     defaultRoomSettings[`p${p}l${l}`] = true;
   }
 }
 

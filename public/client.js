@@ -177,6 +177,8 @@ function saveLegendSettings() {
     }
   }
   
+  console.log(formData);
+  
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", `/api/${roomId}/settings`);
   xhttp.send(formData);
