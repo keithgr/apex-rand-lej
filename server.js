@@ -152,11 +152,6 @@ const selectionOrders = [
   [2, 1, 0]
 ];
 
-const defaultRoomData = {
-  version: 0,
-  spinTimes: [0, 0, 0]
-};
-
 const defaultRoomSettings = [];
 for (let p = 0; p < 3; p++) {
   defaultRoomSettings[p] = [];
@@ -164,6 +159,12 @@ for (let p = 0; p < 3; p++) {
      defaultRoomSettings[p][l] = true;
   }
 }
+
+const defaultRoomData = {
+  version: 0,
+  spinTimes: [0, 0, 0],
+  settings: defaultRoomSettings
+};
 
 // server-side memory
 const tempServerData = {
@@ -217,6 +218,7 @@ app.get("/", (request, response) => {
 // view a specific room
 app.get("/:roomId/", (request, response) => {
   const roomId = request.params.roomId;
+  tempServerData.rooms[roomId] = defaultRoomData;
   response.render(`room`, {
     roomId: roomId,
     legends: legendDataList.map(
