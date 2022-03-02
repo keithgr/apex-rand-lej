@@ -140,7 +140,9 @@ function getStatus() {
             (!response.spinTimes || time < response.spinTimes[2]) &&
             (currentVersion !== newVersion)
           ) {
+            console.log('Rendering room data...');
             renderRoomData();
+            console.log('Rendered.');
           }
         } else {
           console.error('Server request was buggus maximus');
@@ -163,6 +165,8 @@ function submitSpin() {
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", `/api/spin/${roomId}`);
   xhttp.send();
+  
+  console.log('Spin submitted.');
 }
 
 function loadLegendSettings() {
@@ -180,6 +184,8 @@ function loadLegendSettings() {
       toggleInput.checked = settings[p][l];
     }
   }
+  
+  console.log('Loaded');
 }
 
 function initializeRoom() {
@@ -217,6 +223,8 @@ function saveLegendSettings() {
   xhttp.open("POST", `/api/settings/${roomId}`);
   xhttp.setRequestHeader("Content-type", "application/json; charset=utf-8");
   xhttp.send(request);
+  
+  console.log('Saved.');
 }
 
 

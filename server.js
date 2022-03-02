@@ -159,17 +159,20 @@ for (let p = 0; p < 3; p++) {
      defaultRoomSettings[p][l] = true;
   }
 }
-
 const defaultRoomData = {
   version: 0,
   spinTimes: [0, 0, 0],
   settings: defaultRoomSettings
 };
 
+
+
 // server-side memory
 const tempServerData = {
   rooms: {}
 };
+
+
 
 function randInt(n) {
   return Math.floor(n * Math.random());
@@ -178,6 +181,14 @@ function randInt(n) {
 function copy(obj) {
   return JSON.parse(JSON.stringify(obj));
 }
+
+
+
+function getDefaultRoomSettings() { return copy(defaultRoomSettings); }
+
+function getDefaultRoomData() { return copy(defaultRoomData); }
+
+
 
 function generateMetaData(settings) {
   const meta = [-1, -1, -1];
@@ -221,9 +232,8 @@ app.get("/", (request, response) => {
 
 // view a specific room
 app.get("/:roomId/", (request, response) => {
-  console.log(JSON.stringify(tempServerData));
   const roomId = request.params.roomId;
-  tempServerData.rooms[roomId] = tempServerData.rooms[roomId] || copy(defaultRoomData);
+  tempServerData.rooms[roomId] = tempServerData.rooms[roomId] || getDefaultRoomData();
   response.render(`room`, {
     roomId: roomId,
     legends: legendDataList.map(
@@ -238,7 +248,7 @@ app.post("/api/spin/:roomId/", (request, response) => {
   const roomDataSnapshot = tempServerData.rooms[roomId];
   const now = Date.now();
   if (!roomDataSnapshot || (roomDataSnapshot.spinTimes && now > roomDataSnapshot.spinTimes[2])) {
-    const currentSettings = (roomDataSnapshot || {}).settings || copy(defaultRoomSettings);
+    const currentSettings = (roomDataSnapshot || {}).settings || getDefaultRoomSettings();
     const metaData = generateMetaData(currentSettings);
     const newRoomData = {
       version: now,
@@ -263,7 +273,7 @@ app.post("/api/spin/:roomId/", (request, response) => {
 // endpoint to get state data of a room
 app.get("/api/:roomId/", (request, response) => {
   const roomId = request.params.roomId;
-  const roomData = tempServerData.rooms[roomId] || copy(defaultRoomData);
+  const roomData = tempServerData.rooms[roomId] || getDefaultRoomData();
   roomData.time = Date.now();
   response.send(JSON.stringify(roomData));
 });
@@ -272,7 +282,7 @@ app.get("/api/:roomId/", (request, response) => {
 app.post("/api/settings/:roomId/", (request, response) => {
   const roomId = request.params.roomId;
   const newSettings = request.body;
-  tempServerData.rooms[roomId] = tempServerData.rooms[roomId] || copy(defaultRoomData);
+  tempServerData.rooms[roomId] = tempServerData.rooms[roomId] || getDefaultRoomData();
   
   console.log(`Applying new settings to room ${roomId}: ${JSON.stringify(newSettings)}`);
   tempServerData.rooms[roomId].settings = newSettings;
