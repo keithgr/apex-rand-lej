@@ -196,7 +196,7 @@ app.get("/:roomId/", (request, response) => {
 });
 
 // endpoint to update room data to a spinning state
-app.post("/api/:roomId/spin/", (request, response) => {
+app.post("/api/spin/:roomId/", (request, response) => {
   const roomId = request.params.roomId;
   const roomDataSnapshot = tempServerData.rooms[roomId];
   const now = Date.now();
@@ -227,15 +227,15 @@ app.get("/api/:roomId/", (request, response) => {
 });
 
 // endpoint to update settings for room
-app.post("/api/:roomId/settings/", (request, response) => {
-  console.log(request.query);
+app.post("/api/settings/:roomId/", (request, response) => {
+  console.log(request.body);
   const roomId = request.params.roomId;
   tempServerData.rooms[roomId] = tempServerData.rooms[roomId] || {};
   const roomDataSnapshot = tempServerData.rooms[roomId];
   const newSettings = {};
   for (let p = 0; p < 3; p++) {
     for (let l = 0; l < legendDataList.length; l++) {
-      newSettings[`p${p}l${l}`] = request.query[`p${p}l${l}`]
+      newSettings[`p${p}l${l}`] = request.body[`p${p}l${l}`]
     }
   }
   console.log(newSettings);

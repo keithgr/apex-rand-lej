@@ -157,7 +157,7 @@ function getStatus() {
 
 function submitSpin() {
   const xhttp = new XMLHttpRequest();
-  xhttp.open("POST", `/api/${roomId}/spin`);
+  xhttp.open("POST", `/api/spin/${roomId}`);
   xhttp.send();
 }
 
@@ -173,15 +173,18 @@ function saveLegendSettings() {
     const toggleOptions = toggleColumn.getElementsByClassName('toggle-option');
     for (let l = 0; l < toggleOptions.length; l++) {
       const toggleInput = document.getElementById(`p${p}l${l}`);
-      requestBody[`p${p}l${l}`] = toggleInput
+      requestBody[`p${p}l${l}`] = toggleInput.checked;
     }
   }
   
-  console.log(formData);
+  const request = JSON.stringify(requestBody);
   
   const xhttp = new XMLHttpRequest();
-  xhttp.open("POST", `/api/${roomId}/settings`);
-  xhttp.send(formData);
+  xhttp.open("POST", `/api/settings/${roomId}`);
+  xhttp.setRequestHeader("Content-type", "application/json; charset=utf-8");
+  xhttp.setRequestHeader("Content-length", request.length);
+  xhttp.setRequestHeader("Connection", "close");
+  xhttp.send(request);
 }
 
 
