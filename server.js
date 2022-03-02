@@ -143,6 +143,15 @@ const firstSlotTimeDelay = 3000;
 const secondSlotTimeDelay = 6000;
 const thirdSlotTimeDelay = 9000;
 
+const selectionOrders = [
+  [0, 1, 2],
+  [0, 2, 1],
+  [1, 0, 2],
+  [1, 2, 0],
+  [2, 0, 1],
+  [2, 1, 0]
+];
+
 const defaultRoomData = {
   version: 0,
   spinTimes: [0, 0, 0]
@@ -174,6 +183,7 @@ function generateMeta() {
 }
 
 function generateMeta(settings) {
+  const playerSelectionOrder = [];
   
 }
 
@@ -237,14 +247,8 @@ app.get("/api/:roomId/", (request, response) => {
 // endpoint to update settings for room
 app.post("/api/settings/:roomId/", (request, response) => {
   const roomId = request.params.roomId;
+  const newSettings = request.body;
   tempServerData.rooms[roomId] = tempServerData.rooms[roomId] || defaultRoomData;
-  const roomDataSnapshot = tempServerData.rooms[roomId];
-  const newSettings = {};
-  for (let p = 0; p < 3; p++) {
-    for (let l = 0; l < legendDataList.length; l++) {
-      newSettings[`p${p}l${l}`] = request.body[`p${p}l${l}`]
-    }
-  }
   
   console.log(`Applying new settings to room ${roomId}: ${JSON.stringify(newSettings)}`);
   tempServerData.rooms[roomId].settings = newSettings;

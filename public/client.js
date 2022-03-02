@@ -137,12 +137,7 @@ function getStatus() {
             (!response.spinTimes || time < response.spinTimes[2]) &&
             (currentVersion !== newVersion)
           ) {
-            try {
-              renderRoomData();
-            }
-            catch (debug) {
-              throw `${debug} : ${JSON.stringify(response)} : ${JSON.stringify(roomData)} : ${JSON.stringify(roomDataSnapshot)}`;
-            }
+            renderRoomData();
           }
         } else {
           console.error('Server request was buggus maximus');
@@ -172,11 +167,11 @@ function loadLegendSettings() {
 
 function saveLegendSettings() {
   const toggleColumns = legendToggle.getElementsByClassName('toggle-column');
-  const requestBody = {};
+  const requestBody = [];
   for (let p = 0; p < toggleColumns.length; p++) {
     const toggleColumn = toggleColumns[p];
     const toggleOptions = toggleColumn.getElementsByClassName('toggle-option');
-    requestBody[p] = {};
+    requestBody[p] = [];
     for (let l = 0; l < toggleOptions.length; l++) {
       const toggleInput = document.getElementById(`p${p}l${l}`);
       requestBody[p][l] = toggleInput.checked;
