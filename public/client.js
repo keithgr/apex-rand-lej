@@ -170,6 +170,7 @@ function loadLegendSettings() {
   const roomDataSnapshot = roomData;
   const settings = roomDataSnapshot.settings;
   
+  console.log(settings);
   const toggleColumns = legendToggle.getElementsByClassName('toggle-column');
   for (let p = 0; p < toggleColumns.length; p++) {
     const toggleColumn = toggleColumns[p];
@@ -178,6 +179,20 @@ function loadLegendSettings() {
       const toggleInput = document.getElementById(`p${p}l${l}`);
       toggleInput.checked = settings[p][l];
     }
+  }
+}
+
+function initializeRoom() {
+  if (!roomData || !roomData.settings) {
+    setTimeout(
+      () => {
+        initializeRoom();  
+      },
+      500
+    );
+  }
+  else {
+    loadLegendSettings();
   }
 }
 
@@ -218,6 +233,8 @@ try {
 catch (nah) {
   console.log("Could not display result of last spin");
 }
+
+initializeRoom();
 
 spinButton.addEventListener("click", submitSpin);
 loadButton.addEventListener("click", loadLegendSettings);
