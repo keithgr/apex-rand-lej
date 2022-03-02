@@ -173,6 +173,10 @@ function generateMeta() {
   return meta;
 }
 
+function generateMeta(settings) {
+  
+}
+
 // view homepage
 app.get("/", (request, response) => {
   let roomId = request.query.roomId;
@@ -202,6 +206,7 @@ app.post("/api/spin/:roomId/", (request, response) => {
   const roomDataSnapshot = tempServerData.rooms[roomId];
   const now = Date.now();
   if (!roomDataSnapshot || (roomDataSnapshot.spinTimes && now > roomDataSnapshot.spinTimes[2])) {
+    const currentSettings = (roomDataSnapshot || {}).settings || defaultRoomSettings;
     const newRoomData = {
       version: now,
       spinTimes: [
@@ -209,10 +214,12 @@ app.post("/api/spin/:roomId/", (request, response) => {
         now + secondSlotTimeDelay,
         now + thirdSlotTimeDelay
       ],
-      meta: generateMeta(),
       legendDataList: legendDataList,
-      settings: (roomDataSnapshot || {}).settings || defaultRoomSettings
+      meta: generateMeta(currentSettings),
+      settings: currentSettings
     };
+    
+    console.log(`Updating data for room ${roomId}: ${JSON.stringify(newRoomData)}`);
     tempServerData.rooms[roomId] = newRoomData;
   } else {
     console.warn(`Room ${roomId} is already spinning`);
@@ -229,9 +236,8 @@ app.get("/api/:roomId/", (request, response) => {
 
 // endpoint to update settings for room
 app.post("/api/settings/:roomId/", (request, response) => {
-  console.log(request.body);
   const roomId = request.params.roomId;
-  tempServerData.rooms[roomId] = tempServerData.rooms[roomId] || {};
+  tempServerData.rooms[roomId] = tempServerData.rooms[roomId] || defaultRoomData;
   const roomDataSnapshot = tempServerData.rooms[roomId];
   const newSettings = {};
   for (let p = 0; p < 3; p++) {
@@ -239,7 +245,8 @@ app.post("/api/settings/:roomId/", (request, response) => {
       newSettings[`p${p}l${l}`] = request.body[`p${p}l${l}`]
     }
   }
-  console.log(newSettings);
+  
+  console.log(`Applying new settings to room ${roomId}: ${JSON.stringify(newSettings)}`);
   tempServerData.rooms[roomId].settings = newSettings;
 });
 

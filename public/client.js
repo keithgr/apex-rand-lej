@@ -171,14 +171,15 @@ function loadLegendSettings() {
 }
 
 function saveLegendSettings() {
-  let requestBody = {};
   const toggleColumns = legendToggle.getElementsByClassName('toggle-column');
+  const requestBody = {};
   for (let p = 0; p < toggleColumns.length; p++) {
     const toggleColumn = toggleColumns[p];
     const toggleOptions = toggleColumn.getElementsByClassName('toggle-option');
+    requestBody[p] = {};
     for (let l = 0; l < toggleOptions.length; l++) {
       const toggleInput = document.getElementById(`p${p}l${l}`);
-      requestBody[`p${p}l${l}`] = toggleInput.checked;
+      requestBody[p][l] = toggleInput.checked;
     }
   }
   
@@ -187,8 +188,6 @@ function saveLegendSettings() {
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", `/api/settings/${roomId}`);
   xhttp.setRequestHeader("Content-type", "application/json; charset=utf-8");
-  xhttp.setRequestHeader("Content-length", request.length);
-  xhttp.setRequestHeader("Connection", "close");
   xhttp.send(request);
 }
 
