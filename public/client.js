@@ -159,16 +159,30 @@ function getStatus() {
 }
 
 function submitSpin() {
+  console.log('Submitting spin...');
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", `/api/spin/${roomId}`);
   xhttp.send();
 }
 
 function loadLegendSettings() {
+  console.log('Loading legend settings...');
+  const roomDataSnapshot = roomData;
+  const settings = roomDataSnapshot.settings;
   
+  const toggleColumns = legendToggle.getElementsByClassName('toggle-column');
+  for (let p = 0; p < toggleColumns.length; p++) {
+    const toggleColumn = toggleColumns[p];
+    const toggleOptions = toggleColumn.getElementsByClassName('toggle-option');
+    for (let l = 0; l < toggleOptions.length; l++) {
+      const toggleInput = document.getElementById(`p${p}l${l}`);
+      toggleInput.checked = settings[p][l];
+    }
+  }
 }
 
 function saveLegendSettings() {
+  console.log('Saving legend settings...');
   const toggleColumns = legendToggle.getElementsByClassName('toggle-column');
   const requestBody = [];
   for (let p = 0; p < toggleColumns.length; p++) {
