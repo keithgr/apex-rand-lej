@@ -50,8 +50,11 @@ function showLegendBanner(slotIndex, legendId, isConfirmed=false) {
 }
 
 function showRandomLegendBanner(slotIndex) {
-  const r = Math.floor(roomData.legendDataList.length * Math.random());
-  showLegendBanner(slotIndex, r);
+  const roomDataSnapshot = roomData;
+  const slotCandidateSet = roomDataSnapshot.slotCandidates[slotIndex];
+  const randIndex = Math.floor(slotCandidateSet.length * Math.random());
+  const legendId = slotCandidateSet[randIndex];
+  showLegendBanner(slotIndex, legendId);
 }
 
 function isSpinning(slotIndex) {
@@ -181,6 +184,7 @@ function saveLegendSettings() {
   console.log(requestBody);
   const request = JSON.stringify(requestBody);
   const xhttp = new XMLHttpRequest();
+  xhttp.timeout = clientStatusTimeout;
   xhttp.open("POST", `/api/settings/${roomId}`);
   xhttp.setRequestHeader("Content-type", "application/json; charset=utf-8");
   xhttp.send(request);

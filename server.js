@@ -176,7 +176,7 @@ function randInt(n) {
 
 function generateMetaData(settings) {
   const meta = [-1, -1, -1];
-  const slotCandidates = [null, null, null];
+  const slotCandidates = [[], [], []];
   
   const order = selectionOrders[randInt(6)];
   for (let s = 0; s < 3; s++) {
@@ -184,7 +184,10 @@ function generateMetaData(settings) {
     const candidates = [];
     for (let l = 0; l < legendDataList.length; l++) {
       if (settings[p][l]) {
-        slotCandidates[p]
+        slotCandidates[p].push(l);
+        if (!meta.includes(l)) {
+          candidates.push(l);
+        }
       }
     }
     
@@ -193,7 +196,10 @@ function generateMetaData(settings) {
     meta[p] = randomCandidate;
   }
   
-  return meta;
+  return {
+    meta: meta,
+    slotCandidates: slotCandidates
+  };
 }
 
 // view homepage
@@ -226,6 +232,7 @@ app.post("/api/spin/:roomId/", (request, response) => {
   const now = Date.now();
   if (!roomDataSnapshot || (roomDataSnapshot.spinTimes && now > roomDataSnapshot.spinTimes[2])) {
     const currentSettings = (roomDataSnapshot || {}).settings || defaultRoomSettings;
+    const metaData = generateMetaData(currentSettings);
     const newRoomData = {
       version: now,
       spinTimes: [
@@ -234,7 +241,8 @@ app.post("/api/spin/:roomId/", (request, response) => {
         now + thirdSlotTimeDelay
       ],
       legendDataList: legendDataList,
-      meta: generateMeta(currentSettings),
+      meta: metaData.meta,
+      slotCandidates: metaData.slotCandidates,
       settings: currentSettings
     };
     
