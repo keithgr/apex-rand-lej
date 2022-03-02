@@ -166,14 +166,14 @@ function loadLegendSettings() {
 }
 
 function saveLegendSettings() {
-  const formData = new FormData();
+  let formData = '';
   const toggleColumns = legendToggle.getElementsByClassName('toggle-column');
   for (let p = 0; p < toggleColumns.length; p++) {
     const toggleColumn = toggleColumns[p];
     const toggleOptions = toggleColumn.getElementsByClassName('toggle-option');
     for (let l = 0; l < toggleOptions.length; l++) {
       const toggleInput = document.getElementById(`p${p}l${l}`);
-      formData.append(`p${p}l${l}`, toggleInput.value);
+      formData += `p${p}l${l}=${toggleInput.checked}&`;
     }
   }
   

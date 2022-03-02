@@ -228,6 +228,7 @@ app.get("/api/:roomId/", (request, response) => {
 
 // endpoint to update settings for room
 app.post("/api/:roomId/settings/", (request, response) => {
+  console.log(request.query);
   const roomId = request.params.roomId;
   tempServerData.rooms[roomId] = tempServerData.rooms[roomId] || {};
   const roomDataSnapshot = tempServerData.rooms[roomId];
@@ -237,6 +238,7 @@ app.post("/api/:roomId/settings/", (request, response) => {
       newSettings[`p${p}l${l}`] = request.query[`p${p}l${l}`]
     }
   }
+  console.log(newSettings);
   tempServerData.rooms[roomId].settings = newSettings;
 });
 
