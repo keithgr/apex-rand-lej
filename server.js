@@ -148,10 +148,12 @@ const defaultRoomData = {
 };
 
 const defaultRoomSettings = {};
-
 const randLegs = [];
 for (let i = 0; i < legendDataList.length; i++) {
   randLegs.push(i);
+  for (let p = 0; p < 3; p++) {
+     defaultRoomSettings[`p${}l${}`]; 
+  }
 }
 
 // server-side memory
@@ -225,7 +227,7 @@ app.get("/api/:roomId/", (request, response) => {
 });
 
 // endpoint to update settings for room
-app.post("/api/:roomId/settings", (request, response) => {
+app.post("/api/:roomId/settings/", (request, response) => {
   const roomId = request.params.roomId;
   tempServerData.rooms[roomId] = tempServerData.rooms[roomId] || {};
   const roomDataSnapshot = tempServerData.rooms[roomId];
