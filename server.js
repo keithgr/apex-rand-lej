@@ -175,24 +175,23 @@ function randInt(n) {
 }
 
 function generateMeta(settings) {
-  const meta = [-1, -1, -1];  
-  const candidates = [];
-  
+  const meta = [-1, -1, -1];    
   const order = selectionOrders[randInt(6)];
   for (let s = 0; s < 3; s++) {
     const p = order[s];
+    const candidates = [];
     for (let l = 0; l < legendDataList.length; l++) {
-      if (settings[p][l] && ) {
-        candidates[p].push(l);
+      if (settings[p][l] && !meta.includes(l)) {
+        candidates.push(l);
       }
     }
     
-    const candidateListSize = candidates[order[s]].length;
-    const randomCandidateIndex = randInt(candidateListSize);
-    const randomCandidate = candidates[order[s]][randomCandidateIndex];
-    meta[order[s]] = randomCandidate;
-    
+    const randomCandidateIndex = randInt(candidates.length);
+    const randomCandidate = candidates[randomCandidateIndex];
+    meta[p] = randomCandidate;
   }
+  
+  return meta;
 }
 
 // view homepage
