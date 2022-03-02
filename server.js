@@ -157,12 +157,11 @@ const defaultRoomData = {
   spinTimes: [0, 0, 0]
 };
 
-const defaultRoomSettings = {};
-const randLegs = [];
-for (let l = 0; l < legendDataList.length; l++) {
-  randLegs.push(l);
-  for (let p = 0; p < 3; p++) {
-     defaultRoomSettings[`p${p}l${l}`] = true;
+const defaultRoomSettings = [];
+for (let p = 0; p < 3; p++) {
+  defaultRoomSettings[p] = [];
+  for (let l = 0; l < legendDataList.length; l++) {
+     defaultRoomSettings[p][l] = true;
   }
 }
 
@@ -171,20 +170,25 @@ const tempServerData = {
   rooms: {}
 };
 
-function generateMeta() {
-  const randLegsCopy = randLegs.slice(0);
-  const meta = [];
-  for (let l = 0; l < 3; l++) {
-    const r = Math.floor(randLegsCopy.length * Math.random());
-    const randLeg = randLegsCopy.splice(r, 1)[0];
-    meta.push(randLeg);
-  }
-  return meta;
+function randInt(n) {
+  return Math.floor(n * Math.random());
 }
 
 function generateMeta(settings) {
-  const playerSelectionOrder = [];
+  const candidates = [];
+  for (let p = 0; p < 3; p++) {
+    candidates[p] = [];
+    for (let l = 0; l < legendDataList.length; l++) {
+      if (settings[p][l]) {
+        candidates[p].push(l);
+      }
+    }
+  }
   
+  const playerSelectionOrder = selectionOrders[randInt(6)];
+  for (let s = 0; ) {
+    
+  }
 }
 
 // view homepage
