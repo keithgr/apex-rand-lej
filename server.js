@@ -217,8 +217,9 @@ app.get("/", (request, response) => {
 
 // view a specific room
 app.get("/:roomId/", (request, response) => {
+  console.log(JSON.stringify(tempServerData));
   const roomId = request.params.roomId;
-  tempServerData.rooms[roomId] = defaultRoomData;
+  // tempServerData.rooms[roomId] = tempServerData.rooms[roomId] || defaultRoomData;
   response.render(`room`, {
     roomId: roomId,
     legends: legendDataList.map(
