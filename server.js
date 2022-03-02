@@ -200,7 +200,7 @@ app.post("/api/spin/:roomId/", (request, response) => {
   const roomId = request.params.roomId;
   const roomDataSnapshot = tempServerData.rooms[roomId];
   const now = Date.now();
-  if (!roomDataSnapshot || (roomDataSnapshot && now > roomDataSnapshot.spinTimes[2])) {
+  if (!roomDataSnapshot || (roomDataSnapshot.spinTimes && now > roomDataSnapshot.spinTimes[2])) {
     const newRoomData = {
       version: now,
       spinTimes: [
@@ -239,7 +239,7 @@ app.post("/api/settings/:roomId/", (request, response) => {
     }
   }
   console.log(newSettings);
-  // tempServerData.rooms[roomId].settings = newSettings;
+  tempServerData.rooms[roomId].settings = newSettings;
 });
 
 
