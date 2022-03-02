@@ -174,15 +174,17 @@ function randInt(n) {
   return Math.floor(n * Math.random());
 }
 
-function generateMeta(settings) {
-  const meta = [-1, -1, -1];    
+function generateMetaData(settings) {
+  const meta = [-1, -1, -1];
+  const slotCandidates = [null, null, null];
+  
   const order = selectionOrders[randInt(6)];
   for (let s = 0; s < 3; s++) {
     const p = order[s];
     const candidates = [];
     for (let l = 0; l < legendDataList.length; l++) {
-      if (settings[p][l] && !meta.includes(l)) {
-        candidates.push(l);
+      if (settings[p][l]) {
+        slotCandidates[p]
       }
     }
     

@@ -70,7 +70,7 @@
           <h4>Player <%= p+1 %></h4>
           <%  for(let i = 0; i < legends.length; i++) { %>
             <div class="toggle-option">
-              <input type="checkbox" id="p<%= p %>l<%= i %>" name="p<%= p %>l<%= i %>" value=1>
+              <input type="checkbox" id="p<%= p %>l<%= i %>" name="p<%= p %>l<%= i %>" value=1 checked>
               <label for="p<%= p %>l<%= i %>"><%= legends[i] %></label>
             </div>
           <%  } %>

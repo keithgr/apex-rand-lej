@@ -178,8 +178,8 @@ function saveLegendSettings() {
     }
   }
   
+  console.log(requestBody);
   const request = JSON.stringify(requestBody);
-  
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", `/api/settings/${roomId}`);
   xhttp.setRequestHeader("Content-type", "application/json; charset=utf-8");
