@@ -191,8 +191,18 @@ function getDefaultRoomData() { return copy(defaultRoomData); }
 function isValidRoomSettings(roomSettings) {
   // Validate legend toggles
   for (let p = 0; p < 3; p++) {
-    let  = 
+    let playerSettings = roomSettings[p];
+    let availableLegendsRemaining = 3;
+    for (let l = 0; l < playerSettings.length && availableLegendsRemaining > 0; l++) {
+      if (playerSettings[l] === true) {
+        availableLegendsRemaining--;
+      }
+    }
+    if (availableLegendsRemaining > 0) {
+      return false;
+    }
   }
+  return true;
 }
 
 
