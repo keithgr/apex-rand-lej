@@ -188,6 +188,13 @@ function getDefaultRoomSettings() { return copy(defaultRoomSettings); }
 
 function getDefaultRoomData() { return copy(defaultRoomData); }
 
+function isValidRoomSettings(roomSettings) {
+  // Validate legend toggles
+  for (let p = 0; p < 3; p++) {
+    let  = 
+  }
+}
+
 
 
 function generateMetaData(settings) {
@@ -286,10 +293,16 @@ app.get("/api/:roomId/", (request, response) => {
 app.post("/api/settings/:roomId/", (request, response) => {
   const roomId = request.params.roomId;
   const newSettings = request.body;
+  if (!isValidRoomSettings(newSettings)) {
+    response.status(400).send({});
+    return;
+  }
   tempServerData.rooms[roomId] = tempServerData.rooms[roomId] || getDefaultRoomData();
   
   console.log(`Applying new settings to room ${roomId}: ${JSON.stringify(newSettings)}`);
   tempServerData.rooms[roomId].settings = newSettings;
+  
+  response.status(200).send({});
 });
 
 
