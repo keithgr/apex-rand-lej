@@ -222,6 +222,13 @@ function saveLegendSettings() {
   xhttp.timeout = clientStatusTimeout;
   xhttp.open("POST", `/api/settings/${roomId}`);
   xhttp.setRequestHeader("Content-type", "application/json; charset=utf-8");
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4) {
+      if (this.status == 200) {
+
+      } 
+    }
+  };
   xhttp.send(request);
   
   console.log('Saved.');

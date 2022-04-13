@@ -304,6 +304,7 @@ app.post("/api/settings/:roomId/", (request, response) => {
   const roomId = request.params.roomId;
   const newSettings = request.body;
   if (!isValidRoomSettings(newSettings)) {
+    console.log(`Room settings failed validation and will not be saved: ${newSettings}`);
     response.status(400).send({});
     return;
   }
