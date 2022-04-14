@@ -225,8 +225,14 @@ function saveLegendSettings() {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4) {
       if (this.status == 200) {
-
-      } 
+        // TODO: Show saved message
+      }
+      else if (this.status == 400) {
+        // TODO: Show invalidation message
+      }
+      else {
+        // TODO: Show server error message
+      }
     }
   };
   xhttp.send(request);

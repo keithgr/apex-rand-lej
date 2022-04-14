@@ -249,8 +249,7 @@ app.get("/", (request, response) => {
 
 // view a specific room
 app.get("/:roomId/", (request, response) => {
-  // HTTPS only
-  // TODO
+  // TODO: HTTPS only
   
   // Actual rendering stuff
   const roomId = request.params.roomId;
