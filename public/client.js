@@ -31,6 +31,8 @@ const playerNames = [
   "player_tree"
 ]
 
+let expireSaveMessageTimeout;
+
 let roomData = {
   version: 0
 };
@@ -170,7 +172,7 @@ function submitSpin() {
   console.log('Spin submitted.');
 }
 
-function loadLegendSettings() {
+function loadLegendSettings(scrollTo=true) {
   console.log('Loading legend settings...');
   const roomDataSnapshot = roomData;
   const settings = roomDataSnapshot.settings;
@@ -189,6 +191,10 @@ function loadLegendSettings() {
   console.log('Loaded');
   saveMessage.style.color = "black";
   saveMessage.innerHTML = `Successfully loaded legend settings`;
+  if (scrollTo) {
+    saveMessage.scrollIntoView();
+  }
+  expireSaveMessage();
 }
 
 function initializeRoom() {
@@ -201,7 +207,7 @@ function initializeRoom() {
     );
   }
   else {
-    loadLegendSettings();
+    loadLegendSettings(false);
   }
 }
 
@@ -240,17 +246,24 @@ function saveLegendSettings() {
         saveMessage.innerHTML = `Unexpected error occurred`;
       }
       saveMessage.scrollIntoView();
-      setTimeout(
-        10000,
-        () => {
-          saveMessage.innerHTML = ``;
-        }
-      );
+      expireSaveMessage();
     }
   };
   xhttp.send(request);
   
   console.log('Saved.');
+}
+
+function expireSaveMessage() {
+  if (expireSaveMessageTimeout) {
+    clearTimeout(expireSaveMessageTimeout);
+  }
+  expireSaveMessageTimeout = setTimeout(
+    () => {
+      saveMessage.innerHTML = ``;
+    },
+    10000
+  );
 }
 
 
