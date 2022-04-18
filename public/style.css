@@ -120,9 +120,14 @@ button {
   background-color: lightgrey;
 }
 
-#load, #save, #save-message {
+#load, #save {
   margin-left: 10px;
   margin-right: 10px;
+}
+
+#save-message {
+  margin-left: 20px;
+  font-weight: bold;
 }
 
 #spin-container {

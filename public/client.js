@@ -189,7 +189,7 @@ function loadLegendSettings(scrollTo=true) {
   }
   
   console.log('Loaded');
-  saveMessage.style.color = "black";
+  saveMessage.style.color = "#333";
   saveMessage.innerHTML = `Successfully loaded legend settings`;
   if (scrollTo) {
     saveMessage.scrollIntoView();
@@ -234,7 +234,7 @@ function saveLegendSettings() {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4) {
       if (this.status == 200) {
-        saveMessage.style.color = "black";
+        saveMessage.style.color = "#333";
         saveMessage.innerHTML = `Successfully saved legend settings`;
       }
       else if (this.status == 400) {
