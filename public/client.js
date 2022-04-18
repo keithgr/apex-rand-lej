@@ -187,7 +187,8 @@ function loadLegendSettings() {
   }
   
   console.log('Loaded');
-  saveMessage.innerHTML = "";
+  saveMessage.style.color = "black";
+  saveMessage.innerHTML = `Successfully loaded legend settings`;
 }
 
 function initializeRoom() {
@@ -228,17 +229,23 @@ function saveLegendSettings() {
     if (this.readyState == 4) {
       if (this.status == 200) {
         saveMessage.style.color = "black";
-        saveMessage.innerHTML = "Successfully saved legend settings";
+        saveMessage.innerHTML = `Successfully saved legend settings`;
       }
       else if (this.status == 400) {
         saveMessage.style.color = "red";
-        saveMessage.innerHTML = "Invalid settings: Each player must have at least 3 legends selected";
+        saveMessage.innerHTML = `Invalid settings: Each player must have at least 3 legends selected`;
       }
       else {
         saveMessage.style.color = "red";
-        saveMessage.innerHTML = "Unexpected error occurred";
+        saveMessage.innerHTML = `Unexpected error occurred`;
       }
       saveMessage.scrollIntoView();
+      setTimeout(
+        10000,
+        () => {
+          saveMessage.innerHTML = ``;
+        }
+      );
     }
   };
   xhttp.send(request);
