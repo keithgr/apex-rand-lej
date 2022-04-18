@@ -120,7 +120,7 @@ button {
   background-color: lightgrey;
 }
 
-#load, #save {
+#load, #save, #save-message {
   margin-left: 10px;
   margin-right: 10px;
 }

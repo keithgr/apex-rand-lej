@@ -17,6 +17,7 @@ const spinText = document.getElementById("spinText");
 const legendToggle = document.getElementById("legend-toggle");
 const loadButton = document.getElementById("load");
 const saveButton = document.getElementById("save");
+const saveMessage = document.getElementById("save-message");
 
 const slots = [
   document.getElementById("slot0"),
@@ -186,6 +187,7 @@ function loadLegendSettings() {
   }
   
   console.log('Loaded');
+  saveMessage.innerHTML = "";
 }
 
 function initializeRoom() {
@@ -225,14 +227,18 @@ function saveLegendSettings() {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4) {
       if (this.status == 200) {
-        // TODO: Show saved message
+        saveMessage.style.color = "black";
+        saveMessage.innerHTML = "Successfully saved legend settings";
       }
       else if (this.status == 400) {
-        // TODO: Show invalidation message
+        saveMessage.style.color = "red";
+        saveMessage.innerHTML = "Invalid settings: Each player must have at least 3 legends selected";
       }
       else {
-        // TODO: Show server error message
+        saveMessage.style.color = "red";
+        saveMessage.innerHTML = "Unexpected error occurred";
       }
+      saveMessage.scrollIntoView();
     }
   };
   xhttp.send(request);
