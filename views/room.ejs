@@ -46,7 +46,7 @@
       <% let defaultPlayerNames = ['player_won', 'player_too', 'player_tree'] %>
       <% for (let s = 0; s < 3; s++) { %>
         <div class="slot" id="slot<%= s %>">
-          <div class="card" width="115" height="250" style="border: solid thick orange; box-shadow: 0 0 10px <%= bannerColors[s] %>;">
+          <div class="card" width="115" height="250" style="border: solid thick <%= bannerColors[s] %>; box-shadow: 0 0 10px <%= bannerColors[s] %>;">
             <div class="kard legend-name">
               <strong>Dummie</strong>
             </div>
