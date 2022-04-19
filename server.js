@@ -162,7 +162,8 @@ for (let p = 0; p < 3; p++) {
 const defaultRoomData = {
   version: 0,
   spinTimes: [0, 0, 0],
-  settings: defaultRoomSettings
+  settings: defaultRoomSettings,
+  profiles: defaultRoomProfiles
 };
 
 
@@ -296,6 +297,17 @@ app.get("/api/:roomId/", (request, response) => {
   const roomData = tempServerData.rooms[roomId] || getDefaultRoomData();
   roomData.time = Date.now();
   response.send(JSON.stringify(roomData));
+});
+
+// endpoint to update profiles for room
+app.post("/api/profiles/:index/:roomId/", (request, response) => {
+  const index = request.params.index;
+  const roomId = request.params.roomId;
+  const newProfile = request.body;
+  tempServerData.rooms[roomId] = tempServerData.rooms[roomId] || getDefaultRoomData();
+  
+  console.log(`Applying new profile to player ${index} and room ${roomId}: ${JSON.stringify(newProfile)}`);
+  tempServerData.rooms[roomId].profiles[index] = newProfile;
 });
 
 // endpoint to update settings for room

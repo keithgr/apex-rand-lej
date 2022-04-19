@@ -16,14 +16,7 @@ header {
 
 header > a {
   margin-right: 10px;
-}
-
-header > * {
   float: left;
-}
-
-.header-space {
-  width: 100%;
 }
 
 #tagline {
