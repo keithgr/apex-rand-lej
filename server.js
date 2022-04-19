@@ -159,11 +159,18 @@ for (let p = 0; p < 3; p++) {
      defaultRoomSettings[p][l] = true;
   }
 }
+
+const defaultRoomProfiles = [
+    {"name": "Player_Won"},
+    {"name": "Player_Too"},
+    {"name": "Player_Tree"}
+];
+
 const defaultRoomData = {
   version: 0,
   spinTimes: [0, 0, 0],
-  settings: defaultRoomSettings,
-  profiles: defaultRoomProfiles
+  profiles: defaultRoomProfiles,
+  settings: defaultRoomSettings
 };
 
 
@@ -185,9 +192,13 @@ function copy(obj) {
 
 
 
+function getDefaultRoomProfiles() { return copy(defaultRoomProfiles) }
+
 function getDefaultRoomSettings() { return copy(defaultRoomSettings); }
 
 function getDefaultRoomData() { return copy(defaultRoomData); }
+
+
 
 function isValidRoomSettings(roomSettings) {
   // Validate legend toggles
@@ -269,6 +280,7 @@ app.post("/api/spin/:roomId/", (request, response) => {
   const roomDataSnapshot = tempServerData.rooms[roomId];
   const now = Date.now();
   if (!roomDataSnapshot || (roomDataSnapshot.spinTimes && now > roomDataSnapshot.spinTimes[2])) {
+    const currentProfiles = (roomDataSnapshot || {}).profiles || getDefaultRoomProfiles();
     const currentSettings = (roomDataSnapshot || {}).settings || getDefaultRoomSettings();
     const metaData = generateMetaData(currentSettings);
     const newRoomData = {
@@ -281,6 +293,7 @@ app.post("/api/spin/:roomId/", (request, response) => {
       legendDataList: legendDataList,
       meta: metaData.meta,
       slotCandidates: metaData.slotCandidates,
+      profiles: currentProfiles,
       settings: currentSettings
     };
     
