@@ -157,8 +157,15 @@ footer {
   border-top: 1px solid lightgrey;
 }
 
+.player-name-container {
+  display: flex;
+  width: 100%;
+}
+
 .player-name {
+  width: 100%;
   text-align: center;
+  border: 0px solid;
 }
 
 .legend-name {
