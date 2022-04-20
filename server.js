@@ -119,21 +119,11 @@ require('merge-descriptors');
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const fs = require("fs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// we've started you off with Express,
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
-
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static("public"));
-
-// init sqlite db
-// const dbFile = "./.data/sqlite.db";
-// const exists = fs.existsSync(dbFile);
-// const sqlite3 = require("sqlite3").verbose();
-// const db = new sqlite3.Database(dbFile);
 
 // set the view engine to ejs
 app.set("view engine", "ejs");
@@ -250,11 +240,9 @@ function generateMetaData(settings) {
 
 
 // redirect HTTP to HTTPS
+app.enable('trust proxy')
 app.use((request, response, next) => {
-  if (!response.httpsConfirmed) {
-    response.httpsConfirmed = true;
-    return response.redirect('https://' + request.headers.host + request.url);    
-  }
+    request.secure ? next() : response.redirect('https://' + request.headers.host + request.url)
 })
 
 // view homepage
