@@ -25,12 +25,6 @@ const slots = [
   document.getElementById("slot2")
 ];
 
-const playerNames = [
-  "player_won",
-  "player_too",
-  "player_tree"
-]
-
 let expireSaveMessageTimeout;
 
 let roomData = {
@@ -40,6 +34,7 @@ let roomData = {
 function showLegendBanner(slotIndex, legendId, isConfirmed=false) {
   const slot = slots[slotIndex];
   const legend = roomData.legendDataList[legendId];
+  const profiles = roomData.profiles;
   const cardColor = cardColors[slotIndex];
   slot.innerHTML = `
     <div class="card" width=115 height=250 style="${ isConfirmed ? `border: solid thick ${cardColor}; box-shadow: 0 0 10px ${cardColor};` : 'border: thick solid gray' }">
@@ -48,7 +43,7 @@ function showLegendBanner(slotIndex, legendId, isConfirmed=false) {
       </div>
       <img class="legend-pic" height=180 src="${legend.image}">
     </div>
-    <h6 class="player-name">${playerNames[slotIndex]}</h6>
+    <input id="playerName${slotIndex}" type="text" class="player-name" value="${profiles[slotIndex].name}" onClick="this.select()" onBlur="submitName(<%= s %>)">
   `;
 }
 
@@ -89,7 +84,8 @@ function spinUntilTime(slotIndex) {
       showRandomLegendBanner(slotIndex);
       spinUntilTime(slotIndex);
     }, spinInterval);
-  } else {
+  } 
+  else {
     if (slotIndex == 2) {
       renderNonSpinningStatus();
     }
@@ -272,6 +268,11 @@ function submitName(index) {
     return
   }
   
+  const newName = document.getElementById(`playerName${index}`).value;
+  const request = {
+    name: newName
+  }
+  
   const xhttp = new XMLHttpRequest();
   xhttp.timeout = clientStatusTimeout;
   xhttp.open("POST", `/api/profiles/${index}/${roomId}`);
@@ -279,19 +280,11 @@ function submitName(index) {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4) {
       if (this.status == 200) {
-        saveMessage.style.color = "#333";
-        saveMessage.innerHTML = `Successfully saved legend settings`;
-      }
-      else if (this.status == 400) {
-        saveMessage.style.color = "red";
-        saveMessage.innerHTML = `Invalid settings: Each player must have at least 3 legends selected`;
+        console.log(`Name, "${newName}" saved for player${index}`);
       }
       else {
-        saveMessage.style.color = "red";
-        saveMessage.innerHTML = `Unexpected error occurred`;
+        console.error(`Unexpected error saving name, "${newName}" for player${index}`);
       }
-      saveMessage.scrollIntoView();
-      expireSaveMessage();
     }
   };
   xhttp.send(request);
