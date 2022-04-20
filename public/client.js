@@ -43,7 +43,7 @@ function showLegendBanner(slotIndex, legendId, isConfirmed=false) {
       </div>
       <img class="legend-pic" height=180 src="${legend.image}">
     </div>
-    <input id="playerName${slotIndex}" type="text" class="player-name" value="${profiles[slotIndex].name}" onClick="this.select()" onBlur="submitName(${slotIndex})">
+    <input id="playerName${slotIndex}" type="text" class="player-name" value="${profiles[slotIndex].name}" onClick="editPlayerName(${slotIndex})" onBlur="submitName(${slotIndex})">
   `;
 }
 
@@ -303,9 +303,16 @@ function renderPlayerNames() {
     const playerNameDisplay = document.getElementById(`playerName${p}`);
     const currentlyDisplayedPlayerName = playerNameDisplay.value;
     const latestPlayerName = roomDataSnapshot.profiles[p].name;
-    if (currentlyDisplayedPlayerName != latestPlayerName) {
+    if (currentlyDisplayedPlayerName != latestPlayerName && document.activeElement !== playerNameDisplay) {
       playerNameDisplay.value = latestPlayerName;
     }
+  }
+}
+
+function editPlayerName(index) {
+  const playerNameInput = document.getElementById(`playerName${index}`);
+  if (document.activeElement !== playerNameInput) {
+    playerNameInput.select();
   }
 }
 
