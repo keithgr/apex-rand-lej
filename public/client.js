@@ -58,6 +58,9 @@ function showRandomLegendBanner(slotIndex) {
 }
 
 function isSpinning(slotIndex) {
+  // const roomDataSnapshot = roomData;
+  // const now = roomDataSnapshot.time;
+  // return now < roomDataSnapshot.spinTimes[slotIndex];
   const roomDataSnapshot = roomData;
   const trueServerTime = Date.now() - localToServerTimeOffset;
   return trueServerTime < roomDataSnapshot.spinTimes[slotIndex];
