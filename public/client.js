@@ -26,7 +26,7 @@ const slots = [
 ];
 
 const isEditingPlayerName = [false, false, false];
-
+let localToServerTimeOffset;
 let expireSaveMessageTimeout;
 
 let roomData = {
@@ -59,8 +59,8 @@ function showRandomLegendBanner(slotIndex) {
 
 function isSpinning(slotIndex) {
   const roomDataSnapshot = roomData;
-  const now = roomDataSnapshot.time;
-  return now < roomDataSnapshot.spinTimes[slotIndex];
+  const trueServerTime = Date.now() - localToServerTimeOffset;
+  return trueServerTime < roomDataSnapshot.spinTimes[slotIndex];
 }
 
 function renderSpinningStatus() {
@@ -134,11 +134,12 @@ function getStatus() {
           // Typical action to be performed when the document is ready:
           const response = JSON.parse(xhttp.responseText);
           roomData = response;
-          const time = response.time;
+          const serverTime = response.time;
+          localToServerTimeOffset = Date.now() - serverTime;
           const currentVersion = roomDataSnapshot.version;
           const newVersion = response.version;
           if (
-            (!response.spinTimes || time < response.spinTimes[2]) &&
+            (!response.spinTimes || serverTime < response.spinTimes[2]) &&
             (currentVersion !== newVersion)
           ) {
             console.log('Rendering room data...');
