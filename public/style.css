@@ -167,6 +167,7 @@ footer {
   width: 100%;
   text-align: center;
   border: 0px solid;
+  font-weight: bold;
 }
 
 .legend-name {

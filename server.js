@@ -321,6 +321,8 @@ app.post("/api/profiles/:index/:roomId/", (request, response) => {
   
   console.log(`Applying new profile to player ${index} and room ${roomId}: ${JSON.stringify(newProfile)}`);
   tempServerData.rooms[roomId].profiles[index] = newProfile;
+  
+  response.status(200).send({});
 });
 
 // endpoint to update settings for room

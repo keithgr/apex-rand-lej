@@ -43,7 +43,7 @@ function showLegendBanner(slotIndex, legendId, isConfirmed=false) {
       </div>
       <img class="legend-pic" height=180 src="${legend.image}">
     </div>
-    <input id="playerName${slotIndex}" type="text" class="player-name" value="${profiles[slotIndex].name}" onClick="this.select()" onBlur="submitName(<%= s %>)">
+    <input id="playerName${slotIndex}" type="text" class="player-name" value="${profiles[slotIndex].name}" onClick="this.select()" onBlur="submitName(${slotIndex})">
   `;
 }
 
@@ -269,18 +269,23 @@ function submitName(index) {
   }
   
   const newName = document.getElementById(`playerName${index}`).value;
-  const request = {
-    name: newName
-  }
+  const request = JSON.stringify(
+    {
+      name: newName
+    }
+  );
+  const endpoint = `/api/profiles/${index}/${roomId}`;
+  console.log(`Attempting to submit request, ${request}, to endpoint, [${endpoint}]`);
   
   const xhttp = new XMLHttpRequest();
   xhttp.timeout = clientStatusTimeout;
-  xhttp.open("POST", `/api/profiles/${index}/${roomId}`);
+  xhttp.open("POST", endpoint);
   xhttp.setRequestHeader("Content-type", "application/json; charset=utf-8");
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4) {
       if (this.status == 200) {
         console.log(`Name, "${newName}" saved for player${index}`);
+        renderRoomData();
       }
       else {
         console.error(`Unexpected error saving name, "${newName}" for player${index}`);
