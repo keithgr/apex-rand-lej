@@ -25,6 +25,8 @@ const slots = [
   document.getElementById("slot2")
 ];
 
+const isEditingPlayerName = [false, false, false];
+
 let expireSaveMessageTimeout;
 
 let roomData = {
@@ -266,6 +268,7 @@ function expireSaveMessage() {
 }
 
 function submitName(index) {
+  isEditingPlayerName[index] = false;
   if (!(index in [0, 1, 2])) {
     console.error("submitName requires a valid player index");
     return
@@ -311,9 +314,10 @@ function renderPlayerNames() {
 
 function editPlayerName(index) {
   const playerNameInput = document.getElementById(`playerName${index}`);
-  if (document.activeElement !== playerNameInput) {
-    playerNameInput.select();
+  if (!isEditingPlayerName[index]) {
+    playerNameInput.select(); 
   }
+  isEditingPlayerName[index] = true;
 }
 
 

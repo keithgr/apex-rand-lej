@@ -53,7 +53,7 @@
             <img class="legend-pic" src="https://cdn.glitch.global/5fba9e63-a0f9-4df4-8cdc-134ede9a4405/dummie.png?v=1645584352373" height="180">
           </div>
           <div class="player-name-container">
-            <input id="playerName<%= s %>" type="text" class="player-name" value="<%= defaultPlayerNames[s] %>" onClick="editPlayerName(<%= s %>)" onBlur="submitName(<%= s %>)">
+            <input id="playerName<%= s %>" type="text" class="player-name" value="<%= defaultPlayerNames[s] %>" onFocus="editPlayerName(<%= s %>)" onBlur="submitName(<%= s %>)">
           </div>
         </div>
       <% } %>
