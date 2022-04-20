@@ -161,9 +161,9 @@ for (let p = 0; p < 3; p++) {
 }
 
 const defaultRoomProfiles = [
-    {"name": "Player_Won"},
-    {"name": "Player_Too"},
-    {"name": "Player_Tree"}
+    {"name": "✏️ Player_Won"},
+    {"name": "✏️ Player_Too"},
+    {"name": "✏️ Player_Tree"}
 ];
 
 const defaultRoomData = {

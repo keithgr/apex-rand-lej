@@ -43,7 +43,7 @@
     
     <div id="slotmachine">      
       <% let bannerColors = ['orange', 'lightblue', 'lightgreen'] %>
-      <% let defaultPlayerNames = ['Player_Won', 'Player_Too', 'Player_Tree'] %>
+      <% let defaultPlayerNames = ['✏️ Player_Won', '✏️ Player_Too', '✏️ Player_Tree'] %>
       <% for (let s = 0; s < 3; s++) { %>
         <div class="slot" id="slot<%= s %>">
           <div class="card" width="115" height="250" style="border: solid thick <%= bannerColors[s] %>; box-shadow: 0 0 10px <%= bannerColors[s] %>;">
@@ -53,7 +53,7 @@
             <img class="legend-pic" src="https://cdn.glitch.global/5fba9e63-a0f9-4df4-8cdc-134ede9a4405/dummie.png?v=1645584352373" height="180">
           </div>
           <div class="player-name-container">
-            <input type="text" class="player-name" value="✏️ <%= defaultPlayerNames[s] %>" onClick="this.select()">
+            <input id="playerName<%= s %>" type="text" class="player-name" value="<%= defaultPlayerNames[s] %>" onClick="this.select()" onBlur="submitName(<%= s %>)">
           </div>
         </div>
       <% } %>

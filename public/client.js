@@ -266,6 +266,37 @@ function expireSaveMessage() {
   );
 }
 
+function submitName(index) {
+  if (!(index in [0, 1, 2])) {
+    console.error("submitName requires a valid player index");
+    return
+  }
+  
+  const xhttp = new XMLHttpRequest();
+  xhttp.timeout = clientStatusTimeout;
+  xhttp.open("POST", `/api/profiles/${index}/${roomId}`);
+  xhttp.setRequestHeader("Content-type", "application/json; charset=utf-8");
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4) {
+      if (this.status == 200) {
+        saveMessage.style.color = "#333";
+        saveMessage.innerHTML = `Successfully saved legend settings`;
+      }
+      else if (this.status == 400) {
+        saveMessage.style.color = "red";
+        saveMessage.innerHTML = `Invalid settings: Each player must have at least 3 legends selected`;
+      }
+      else {
+        saveMessage.style.color = "red";
+        saveMessage.innerHTML = `Unexpected error occurred`;
+      }
+      saveMessage.scrollIntoView();
+      expireSaveMessage();
+    }
+  };
+  xhttp.send(request);
+}
+
 
 
 getStatus();
