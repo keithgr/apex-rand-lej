@@ -143,6 +143,9 @@ function getStatus() {
             renderRoomData();
             console.log('Rendered.');
           }
+          else {
+            renderPlayerNames();
+          }
         } else {
           console.error('Server request was buggus maximus');
         }
@@ -285,7 +288,6 @@ function submitName(index) {
     if (this.readyState == 4) {
       if (this.status == 200) {
         console.log(`Name, "${newName}" saved for player${index}`);
-        renderRoomData();
       }
       else {
         console.error(`Unexpected error saving name, "${newName}" for player${index}`);
@@ -293,6 +295,18 @@ function submitName(index) {
     }
   };
   xhttp.send(request);
+}
+
+function renderPlayerNames() {
+  const roomDataSnapshot = roomData;
+  for (let p = 0; p < 3; p++) {
+    const playerNameDisplay = document.getElementById(`playerName${p}`);
+    const currentlyDisplayedPlayerName = playerNameDisplay.value;
+    const latestPlayerName = roomDataSnapshot.profiles[p].name;
+    if (currentlyDisplayedPlayerName != latestPlayerName) {
+      playerNameDisplay.value = latestPlayerName;
+    }
+  }
 }
 
 
