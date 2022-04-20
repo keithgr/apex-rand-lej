@@ -251,12 +251,10 @@ function generateMetaData(settings) {
 
 // redirect HTTP to HTTPS
 app.use((request, response, next) => {
-  console.log(request);
-  if (!request.secure) {
-    console.log('https://' + request.headers.host + request.url);
-    return response.redirect('https://' + request.headers.host + request.url);
+  if (!response.httpsConfirmed) {
+    response.httpsConfirmed = true;
+    return response.redirect('https://' + request.headers.host + request.url);    
   }
-  next();
 })
 
 // view homepage
