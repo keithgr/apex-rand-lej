@@ -1,5 +1,5 @@
 # Apex Legends Random Legend Generator!
-This web app will allow you, and your friends, to randomly generate a squad to play with and to view the result together. View the Glitch project page [here](https://glitch.com/~randlej), or go to the website [here](randlej.glitch.me)
+This web app will allow you, and your friends, to randomly generate a squad to play with and to view the result together. View the Glitch project page [here](https://glitch.com/~randlej), or go to the website [here](https://randlej.glitch.me)
 
 ## Platform
 
