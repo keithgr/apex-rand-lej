@@ -1,4 +1,7 @@
-# Hello Node!
+# Apex Legends Random Legend Generator!
+This web app will allow you, and your friends, to randomly generate a squad to play with and to view the result together. View the Glitch project page [here](https://glitch.com/~randlej), or go to the website [here](randlej.glitch.me)
+
+## Platform
 
 This project includes a Node.js server script and a web page that connects to it. The front-end page presents a form the visitor can use to submit a color name, sending the submitted value to the back-end API running on the server. The server returns info to the page that allows it to update the display with the chosen color. 🎨
 
