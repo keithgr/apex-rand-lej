@@ -1,5 +1,5 @@
-# Apex Legends Random Legend Generator!
-This web app will allow you, and your friends, to randomly generate a squad to play with and to view the result together. View the Glitch project page [here](https://glitch.com/~randlej), or go to the website [here](https://randlej.glitch.me)
+# Apex Legends Squad Randomizer
+Welcome to the Apex Legends Squad Randomizer. This is a project hosted on [Glitch](https://glitch.com/) that enables you to roll random squad compositions for the battle royale game, Apex Legends. Join a room with your friends, and you can view the results together, in realtime, no matter where you are located. Go to the website [here](https://randlej.glitch.me), or view the project page [here](https://glitch.com/~randlej).
 
 ## Platform
 
