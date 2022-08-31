@@ -3,7 +3,7 @@ Welcome to **Rand Lej**, the Apex Legends squad randomizer. This is a project ho
 
 ## Technologies
 This web application runs with:
-* NodeJS for server-side processing
-* ExpressJS framework for creating API endpoints
-* EJS templating language for building webpages with server-dependent content
-* Vanilla JavaScript for client-side web page functionality
+* **NodeJS** for server-side processing
+* **ExpressJS** framework for creating API endpoints and serving webpages
+* **EJS** templating language for building webpages with server-dependent content
+* Vanilla **JavaScript** for client-side web page functionality
